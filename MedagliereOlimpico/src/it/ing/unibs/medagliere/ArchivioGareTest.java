@@ -12,19 +12,18 @@ import org.junit.Test;
  */
 
 public class ArchivioGareTest {
-	
+
 	private final static String GARA_1 = "Salto in alto";
 	private final static String GARA_2 = "Salto in lungo";
-	
-	private ArchivioGare creaArchivio(String... gare)
-	{
+
+	private ArchivioGare creaArchivio(String... gare) {
 		ArchivioGare archivio = new ArchivioGare();
-		for(String g : gare)
+		for (String g : gare)
 			archivio.aggiungiGara(new Gara(g));
-		
+
 		return archivio;
-		
-	}	
+
+	}
 
 	@Test
 	public void aggiungiGara() throws Exception {
@@ -37,37 +36,39 @@ public class ArchivioGareTest {
 		try {
 			a.aggiungiGara(new Gara(GARA_1));
 		} catch (IllegalArgumentException e) {
-			assertEquals("Il nome della gara che si sta provando ad inserire Ë gi‡ presente nell' elenco!", e.getMessage());
+			assertEquals(
+					"Il nome della gara che si sta provando ad inserire √® gi√† presente nell' elenco!",
+					e.getMessage());
 		}
-		
+
 		// Se provo ad aggiungere null dovrebbe darmi un errore
-		
+
 		try {
 			a.aggiungiGara(null);
 		} catch (IllegalArgumentException e) {
-			assertEquals("L'argomento non puÚ essere null!", e.getMessage());
+			assertEquals("L'argomento non pu√≤ essere null!", e.getMessage());
 		}
 	}
-	
+
 	@Test
 	public void garaPresente() throws Exception {
 		ArchivioGare a = creaArchivio(GARA_1);
 
-		// Il controllo all'interno della classe Ë effettuato
+		// Il controllo all'interno della classe √® effettuato
 		// utilizzando equalsIgnoreCase, verifico se ritorna
 		// comunque true
-		assertTrue(a.garaPresente(GARA_1.toUpperCase()));		
+		assertTrue(a.garaPresente(GARA_1.toUpperCase()));
 		assertFalse(a.garaPresente(GARA_2));
 	}
-	
+
 	@Test
 	public void getNumeroGare() throws Exception {
-		ArchivioGare a = new ArchivioGare();		
-		assertEquals(0, a.getNumeroGare());		
-		
+		ArchivioGare a = new ArchivioGare();
+		assertEquals(0, a.getNumeroGare());
+
 		ArchivioGare a1 = creaArchivio(GARA_1, GARA_2);
 		assertEquals(2, a1.getNumeroGare());
-		
+
 	}
 
 }

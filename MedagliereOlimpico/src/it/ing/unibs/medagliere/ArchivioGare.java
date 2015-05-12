@@ -3,8 +3,8 @@ package it.ing.unibs.medagliere;
 import java.util.ArrayList;
 
 /**
- * Classe ArchivioGare nella quale vengono definite le azioni che si possono compiere con
- * un archivio di gare e le sue caratteristiche.
+ * Classe ArchivioGare nella quale vengono definite le azioni che si possono
+ * compiere con un archivio di gare e le sue caratteristiche.
  * 
  * @author Marco Cadei, Luca Festoni, Antonello Zanini
  *
@@ -13,36 +13,35 @@ import java.util.ArrayList;
 public class ArchivioGare {
 
 	private ArrayList<Gara> archivio;
-	
+
 	// Stringhe costanti per le eccezioni
 	private static final String ERRORE_NOME_DOPPIO = "Il nome della gara che si sta provando ad inserire è già presente nell' elenco!";
 	private static final String ERRORE_AGGIUNGI_GARA = "L'argomento non può essere null!";
 
-	
 	/**
 	 * Costruttore di default per la creazione di un archivio di gare
 	 */
-	
+
 	public ArchivioGare() {
 		archivio = new ArrayList<Gara>();
 	}
-	
+
 	/**
 	 * Permette di aggiungere una gara all'archivio
 	 * 
 	 * @param gara
-	 *        la gara da aggiugnere all'archivio
-	 *        
+	 *            la gara da aggiugnere all'archivio
+	 * 
 	 * @throws IllegalArgumentException
-	 *         - se la gara è null
-	 *         - se esiste già una gara con lo stesso
-	 *           nome nell'archivio 
+	 *             - se la gara è null - se esiste già una gara con lo stesso
+	 *             nome nell'archivio
 	 */
 
 	public void aggiungiGara(Gara gara) throws IllegalArgumentException {
-		
-		//-**- Il controllo sulla gara con nome non vuoto sarà fatto nel main con la nostra libreria!
-		
+
+		// -**- Il controllo sulla gara con nome non vuoto sarà fatto nel main
+		// con la nostra libreria!
+
 		if (gara == null) {
 			throw new IllegalArgumentException(ERRORE_AGGIUNGI_GARA);
 		} else {
@@ -54,41 +53,42 @@ public class ArchivioGare {
 
 		archivio.add(gara);
 	}
-	
-	
+
 	/**
-	 * Permette di controllare se una gara è presente o meno 
-	 * nell'archivio
+	 * Permette di controllare se una gara è presente o meno nell'archivio
 	 * 
 	 * @param nomeGara
-	 *        il nome della gara di cui controllare la 
-	 *        presenza
-	 *        
-	 * @return - true se la gara è presente
-	 *         - false se la gara non è presente
-	 *     
+	 *            il nome della gara di cui controllare la presenza
+	 * 
+	 * @return - true se la gara è presente - false se la gara non è presente
+	 * 
 	 */
-	
-	public boolean garaPresente(String nomeGara)
-	{
+
+	public boolean garaPresente(String nomeGara) {
 		for (Gara g : archivio) {
-			if (g.getNome().equalsIgnoreCase(nomeGara)) //-**- IgnoreCase perchè non so come l'utente inserisca la Stringa con il nome della gara, magari è un FASCISTA
+			if (g.getNome().equalsIgnoreCase(nomeGara))
 				return true;
 		}
-		
+
 		return false;
 	}
-	
+
 	/**
-	 * Permette di ottenere il numero di gare presenti
-	 * nell'archivio
+	 * Permette di ottenere il numero di gare presenti nell'archivio
 	 * 
 	 * @return il numero di gare presenti nell'archivio
 	 */
-	
-	public int getNumeroGare()
-	{
+
+	public int getNumeroGare() {
 		return archivio.size();
+	}
+	
+	public Gara getGara(int indice) throws IndexOutOfBoundsException
+	{
+		if (indice < 1 || indice > archivio.size())
+			throw new IndexOutOfBoundsException("Gara non presente");
+
+		return archivio.get(indice - 1);
 	}
 
 }
